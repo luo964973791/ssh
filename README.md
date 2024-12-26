@@ -14,6 +14,8 @@ ssh -R 36000:172.27.0.3:36000 root@172.27.0.5 -N
 使用完毕关闭ssh反向代理隧道命令：exit
 
 服务器B：172.27.0.5不能联网的服务器上面执行使用代理,访问172.27.0.5:36000端口会转发到172.27.0.3:36000端口上面，方法二可以访问谷歌的方法有区别,注意看仔细IP怎么用:
+sed -i 's/#AllowTcpForwarding no/AllowTcpForwarding yes/' /etc/ssh/sshd_config && sed -i 's/GatewayPorts no/GatewayPorts yes/' /etc/ssh/sshd_config
+systemctl restart sshd
 export http_proxy=172.27.0.5:36000
 export https_proxy=172.27.0.5:36000
 export ftp_proxy=172.27.0.5:36000
