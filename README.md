@@ -19,9 +19,9 @@ GatewayPorts yes
 
 
 systemctl restart sshd
-export http_proxy=172.27.0.5:36000
-export https_proxy=172.27.0.5:36000
-export ftp_proxy=172.27.0.5:36000
+export http_proxy=172.27.0.5:3128
+export https_proxy=172.27.0.5:3128
+export ftp_proxy=172.27.0.5:3128
 ```
 ### 第二种SSH反向代理可以访问谷歌的方法，有Clash for windows就不用安装tinyproxy这个包了.
 ```javascript
