@@ -1,6 +1,6 @@
 ### 第一种SSH反向代理不能访问谷歌的方法
 ```javascript
-服务器A172.27.0.3可以联网的服务器执行：
+服务器A: 172.27.0.3可以联网的服务器执行：
 yum install tinyproxy -y
 vi /etc/tinyproxy/tinyproxy.conf 
 Port 36000
@@ -22,7 +22,7 @@ export ftp_proxy=172.27.0.5:36000
 服务器B Linux不可以联网: 172.27.0.5
 服务器C windows：172.27.0.6
 
-在服务器A上面执行如下命令：
+服务器A: 上面执行如下命令：
 sed -i 's/#AllowTcpForwarding no/AllowTcpForwarding yes/' /etc/ssh/sshd_config && sed -i 's/GatewayPorts no/GatewayPorts yes/' /etc/ssh/sshd_config
 /usr/bin/ssh -R 36000:172.27.0.6:36000 root@172.27.0.3 -N
 
