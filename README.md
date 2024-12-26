@@ -1,19 +1,18 @@
 ### 第一种SSH反向代理不能访问谷歌的方法
 ```javascript
 服务器A: 172.27.0.3可以联网的服务器执行：
-yum install tinyproxy -y
-vi /etc/tinyproxy/tinyproxy.conf 
-Port 36000
-Listen 0.0.0.0
-Allow 0.0.0.0/0
-Allow ::/0
-systemctl restart tinyproxy
-systemctl status tinyproxy
+yum install squid -y
+acl allsrc src 0.0.0.0/0
+http_access allow allsrc
+http_access allow localhost
 
-ssh -R 36000:172.27.0.3:36000 root@172.27.0.5 -N
+
+systemctl restart squid
+
+ssh -R 3128:172.27.0.3:3128 root@172.27.0.5 -N
 使用完毕关闭ssh反向代理隧道命令：exit
 
-服务器B：172.27.0.5不能联网的服务器上面执行使用代理,访问172.27.0.5:36000端口会转发到172.27.0.3:36000端口上面，方法二可以访问谷歌的方法有区别,注意看仔细IP怎么用:
+服务器B：172.27.0.5不能联网的服务器上面执行使用代理,访问172.27.0.5:3128端口会转发到172.27.0.3:3128端口上面，方法二可以访问谷歌的方法有区别,注意看仔细IP怎么用:
 cat /etc/ssh/sshd_config | grep -E 'AllowTcpForwarding|GatewayPorts'
 AllowTcpForwarding yes
 GatewayPorts yes
