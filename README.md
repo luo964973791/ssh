@@ -18,7 +18,7 @@ export http_proxy=172.27.0.5:36000
 export https_proxy=172.27.0.5:36000
 export ftp_proxy=172.27.0.5:36000
 ```
-### 第二种SSH反向代理可以访问谷歌的方法
+### 第二种SSH反向代理可以访问谷歌的方法，有Clash for windows就不用安装tinyproxy这个包了.
 ```javascript
 服务器A linux可以联网：  172.27.0.3
 服务器B Linux不可以联网: 172.27.0.5
