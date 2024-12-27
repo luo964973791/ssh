@@ -2,9 +2,11 @@
 ```javascript
 服务器A: 172.27.0.3可以联网的服务器执行：
 yum install squid -y
-acl allsrc src 0.0.0.0/0
-http_access allow allsrc
-http_access allow localhost
+vi /etc/squid/squid.conf
+#http_access deny all 把这个注释掉新增一行http_access allow all
+http_access allow all
+http_port 3128
+systemctl restart squid
 
 
 systemctl restart squid
